@@ -1,0 +1,80 @@
+% clear 
+% close all
+% Initialize number of nodes and constants
+N = 100;
+
+L = 0.01;
+rho = 11000;
+k = 4.5;
+c = 300;
+alpha = k/(rho*c);
+q = 300E6/(2/pi);
+h = L/(N-1);
+dt = 0.0001;
+% Initialize domain
+x = linspace(0,L,N);
+x1 = x;
+% Initialize and plot heat distribTtion at t = 0
+T = ones(1,N)*500; 
+T = T;
+hold on
+% Calculate heat at specified times
+t = [1,1.1,6,8];
+jmax = t/dt;
+k = 4.5;
+T(1) = 420;
+T(length(T)) = 420; 
+error = 1;
+count = 0;
+while error > 0.001
+Told = T;
+for i=2:N-1    
+    T(i) = (Told(i-1) + Told(i+1))/2 + (h^2)*q*sin((pi*i*h)/L)/(2*k);
+% T(i) = Told(i) + alpha*dt((Told(i-1)- 2*Toldi*(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L));
+end
+error = max(abs(T-Told));
+end
+plot(x,T)
+grid on
+xlabel('x')
+ylabel('T')
+
+
+% clear 
+% close all
+% Initialize number of nodes and constants
+N = 100;
+
+L = 0.01;
+rho = 11000;
+k = 4.5;
+c = 300;
+alpha = k/(rho*c);
+q = (300E6/(2/pi));
+h = L/(N-1);
+dt = 0.0001;
+% Initialize domain
+x = linspace(0,L,N);
+x1 = x;
+% Initialize and plot heat distribTtion at t = 0
+
+hold on
+% Calculate heat at specified times
+t = [1,2,3,5];
+jmax = t/dt;
+w = 1;
+T(length(T)) = 300;
+for j = 1:jmax(4) 
+    Told = T;
+for i=N-1:-1:2    
+    T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + 0*q*sin((pi*i*h)/L)/k);
+% T(i) = Told(i) + alpha*dt((Told(i-1)- 2*Toldi*(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L));
+end
+T(1) = T(2);
+if j == jmax(w)
+plot(x,T)
+xlabel('x')
+ylabel('T')
+w = w+1;
+end
+end

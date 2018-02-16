@@ -1,0 +1,12 @@
+% fun = @(x) exp(-x.^2).*log(x).^2;
+% q = integral(fun,0,Inf)
+L = 0.01;
+q = 300E6
+x = linspace(0,L,100);
+k = 4;
+T=100;
+fun = @(x) ((L^2*q*sin(pi.*x/L)/(pi^2*k))+T).*cos(2*pi.*x/(2*L));
+w = integral(fun,0,L)
+
+fun2 = @(x) cos^2(2*pi.*x/(2*L));
+w = integral(fun,0,L)

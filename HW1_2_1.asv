@@ -1,0 +1,49 @@
+% clear 
+% close
+% Set maximum number of partial sums
+nmax = 40;
+c = 0.5;
+k = 4.5;
+Tw = 300;
+Tw2 = 420;
+rho = 10000;
+alpha = k/(rho*c);
+q = 300E6/(pi/2);
+L = 0.005;
+% Initialize domain
+x = linspace(-L,L,100);
+% Plot initial condition
+
+% Calculate temperature of rod at various times
+t=0.1;
+count = 0;
+
+T = 0;
+for n=1:nmax
+count = (n+1)/2;
+if n == 1
+   Bn =(((4*(pi*k*L*Tw2-((L^3))*q))/((pi^2)*k)))/L;
+end
+if 
+if mod(count,2)
+    constant = 1;
+else
+    constant = -1;
+end
+% Bn = 4*C/(n*pi);
+% Bn = constant*((4*(pi*k*L*Tw-(2*(L^3))*q)/(n*(pi^2)*k)))/L;
+
+% T =T +Bn*cos(n*pi*x/(2*L))*exp((-n^2*pi^2*alpha*t)/(4*L^2));
+T =T +Bn*cos(n*pi*x/(2*L))*exp((-n^2*pi^2*alpha*t)/(4*L^2));
+
+end
+
+term2 = ((4*(L^2)*q*cos((pi*x)/(2*L))/((pi^2)*k)));
+term3 = (-2*L*q*x/(pi*k));
+term4 =  (2*(L^2)*q/(pi*k));
+T = T + term2 + term3 + term4+Tw;
+
+plot(x,T)
+
+legend('t=5'), xlabel('Length, x'), ylabel('Temperature')
+
