@@ -8,7 +8,7 @@ rho = 11000;
 k = 4.5;
 c = 300;
 alpha = k/(rho*c);
-q = 300E6/(2/pi);
+q = 300E6/(2/pi)*0.02;
 h = L/(N-1);
 dt = 0.0001;
 % Initialize domain
@@ -22,16 +22,18 @@ hold on
 t = [1,1.1,6,8];
 jmax = t/dt;
 k = 4.5;
-T(1) = 420;
-T(length(T)) = 420; 
+T(1) = 300;
+T(length(T)) = 300; 
 error = 1;
 count = 0;
-while error > 0.001
+while error > 0.00001
 Told = T;
 for i=2:N-1    
-    T(i) = (Told(i-1) + Told(i+1))/2 + (h^2)*q*sin((pi*i*h)/L)/(2*k);
+%     T(i) = (Told(i-1) + Told(i+1))/2 + (h^2)*q*sin((pi*i*h)/L)/(2*k);
+T(i) = (Told(i-1) + Told(i+1))/2 + (h^2)*q*sin((pi*i*h)/L)/(2*k);
 % T(i) = Told(i) + alpha*dt((Told(i-1)- 2*Toldi*(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L));
 end
+T(1) = T(2);
 error = max(abs(T-Told));
 end
 plot(x,T)

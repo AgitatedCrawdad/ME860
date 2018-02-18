@@ -19,7 +19,7 @@ T = ones(1,N)*500;
 T = T;
 hold on
 % Calculate heat at specified times
-t = [1,1.1,6,50];
+t = [1,1.1,6,10];
 jmax = t/dt;
 w = 1;
 T(1) = 420;

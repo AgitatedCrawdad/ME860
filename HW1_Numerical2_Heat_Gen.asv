@@ -43,7 +43,6 @@ ylabel('T')
 % clear 
 % close all
 % Initialize number of nodes and constants
-N = 100;
 
 L = 0.01;
 rho = 11000;
@@ -60,17 +59,18 @@ x1 = x;
 
 hold on
 % Calculate heat at specified times
-t = [1,2,3,5];
+% t = [2,3,4,5];
+t = 5;
 jmax = t/dt;
 w = 1;
 T(length(T)) = 300;
-for j = 1:jmax(4) 
+for j = 1:jmax(length(t)) 
     Told = T;
-for i=N-1:-1:2    
-    T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + q);
-% T(i) = Told(i) + alpha*dt((Told(i-1)- 2*Toldi*(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L));
+for i=2:N-1    
+%     T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + q);
+      T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L)/k);
 end
-
+T(1)=T(2);
 if j == jmax(w)
 plot(x,T)
 xlabel('x')
@@ -78,4 +78,6 @@ ylabel('T')
 w = w+1;
 end
 end
-legend('t1','t2','t3','t=5'), xlabel('Length, x'), ylabel('Temperature')
+legend('t1')
+xlabel('Length, x')
+ylabel('Temperature')

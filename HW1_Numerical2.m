@@ -50,7 +50,7 @@ rho = 11000;
 k = 4.5;
 c = 300;
 alpha = k/(rho*c);
-q = (300E6/(2/pi));
+q = (300E6/(2/pi))*0.02;
 h = L/(N-1);
 dt = 0.0001;
 % Initialize domain
@@ -67,7 +67,7 @@ T(length(T)) = 300;
 for j = 1:jmax(4) 
     Told = T;
 for i=N-1:-1:2    
-    T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + 0*q*sin((pi*i*h)/L)/k);
+    T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L)/k);
 % T(i) = Told(i) + alpha*dt((Told(i-1)- 2*Toldi*(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L));
 end
 T(1) = T(2);
