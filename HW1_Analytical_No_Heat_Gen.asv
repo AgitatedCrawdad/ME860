@@ -18,6 +18,8 @@ x = linspace(0,L,100);
 % Calculate temperature of rod at various times
 % t=[1 2 3 4 5];
 t = 5;
+% t = linspace(0,5,10);
+maxT=zeros(length(t),1);
 count = 0;
 for w=1:length(t)
 T = 0;
@@ -33,7 +35,8 @@ Bn = top/bottom;
 % Bn = constant*((4*(pi*k*L*Tw-(2*(L^3))*q)/(n*(pi^2)*k)))/L;
 
 % T =T +Bn*cos(n*pi*x/(2*L))*exp((-n^2*pi^2*alpha*t)/(4*L^2));
-  T =T +Bn*cos(n*pi.*x/(2*L))*exp((-(n^2)*(pi^2)*alpha*t)/(4*L^2));
+  T =T +Bn*cos(n*pi.*x/(2*L))*exp((-(n^2)*(pi^2)*alpha*t(w))/(4*L^2));
+
 
 
 end
@@ -41,16 +44,19 @@ end
 % term2 = (((L^2)*q*sin((pi*x)/(L))/((pi^2)*k)));
 % term3 = (-L*q*x/(pi*k));
 % term4 =  ((L^2)*q/(pi*k));
-% term2 = (((L^2)*q*sin(pi*x/L)/((pi^2)*k)));
-% term3 = (-L*q.*x/(pi*k));
-% term4 =  ((L^2)*q/(pi*k));
-% T = T + term2 + term3 + term4 + Tw;
-T = T + Tw;
+term2 = (((L^2)*q*sin(pi*x/L)/((pi^2)*k)));
+term3 = (-L*q.*x/(pi*k));
+term4 =  ((L^2)*q/(pi*k));
+T = T + term2 + term3 + term4 + Tw;
+% T = T + Tw;
 hold on
-plot(x,T,')
+% plot(x,T,'--')
+maxT(w) = max(T);
+% plot(t(w),max(T),'--')
 end
 grid on
-
-xlabel('x [m]')
+plot(t,maxT,'--')
+xlabel('Time [s]')
+% xlabel('x [m]')
 ylabel('Temperature [^{o}C]')
 

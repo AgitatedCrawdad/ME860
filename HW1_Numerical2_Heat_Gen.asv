@@ -1,6 +1,7 @@
 % clear 
 % close all
 % Initialize number of nodes and constants
+tic
 N = 100;
 
 L = 0.01;
@@ -36,8 +37,8 @@ error = max(abs(T-Told));
 end
 % plot(x,T)
 grid on
-xlabel('x')
-ylabel('T')
+% xlabel('x')
+% ylabel('T')
 
 
 % clear 
@@ -59,9 +60,11 @@ x1 = x;
 
 hold on
 % Calculate heat at specified times
-% t = [2,3,4,5];
-t = 5;
+% t = [5,10,20,40,80];
+t = 20;
+% t = linspace(0,5,11);
 jmax = t/dt;
+maxT=zeros(length(t),1);
 w = 1;
 T(length(T)) = 300;
 for j = 1:jmax(length(t)) 
@@ -71,13 +74,30 @@ for i=2:N-1
       T(i) = Told(i) + alpha*dt*((Told(i-1)-2*Told(i)+Told(i+1))/(h^2) + q*sin((pi*i*h)/L)/k);
 end
 T(1)=T(2);
-if j == jmax(w)
-plot(x,T)
-xlabel('x')
-ylabel('T')
+if j == jmax(w)||jmax(w)==0 
+maxT(w) = max(T);
+% plot(x,T)
+
+switch w
+    case 1
+        plot(x,T,'r')
+    case 2
+        plot(x,T,'k')
+    case 3
+        plot(x,T,'b')
+    case 4
+        plot(x,T,'g')
+    case 5
+        plot(x,T,'m')
+end
+
+% xlabel('x')
+% ylabel('T')
 w = w+1;
 end
 end
-legend('t1')
-xlabel('Length, x')
-ylabel('Temperature')
+toc
+% plot(t,maxT)
+% legend('t1')
+% xlabel('Length, x')
+% ylabel('Temperature')
