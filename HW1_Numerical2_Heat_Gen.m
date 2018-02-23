@@ -18,7 +18,7 @@ x1 = x;
 % Initialize and plot heat distribTtion at t = 0
 T = ones(1,N)*500; 
 T = T;
-hold on
+% hold on
 % Calculate heat at specified times
 % t = [1,1.1,6,8];
 t = 5;
@@ -53,16 +53,16 @@ c = 300;
 alpha = k/(rho*c);
 q = (300E6/(2/pi))*0.02;
 h = L/(N-1);
-dt = 0.001;
+dt = 0.0037;
 % Initialize domain
 x = linspace(0,L,N);
 x1 = x;
 % Initialize and plot heat distribTtion at t = 0
-hold on
+% hold on
 % Calculate heat at specified times
 % t = [5,10,20,40,80];
-t = 5;
-% t = linspace(0,5,11);
+% t = 5;
+t = linspace(0,5,11);
 jmax = t/dt;
 maxT=zeros(length(t),1);
 w = 1;
@@ -96,9 +96,12 @@ maxT(w) = max(T);
 % ylabel('T')
 w = w+1;
 end
-end
-toc
 plot(x,T,'r')
+MM(j) = getframe; 
+end
+movie(MM)
+toc
+
 % plot(t,maxT,'r')
 % legend('t1')
 % xlabel('Length, x')
